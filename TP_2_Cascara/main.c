@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "funciones.h"
-#define A 20
+#define A 2
 
 typedef struct
 {
@@ -17,12 +17,14 @@ void mostarPersona(xPersona);
 void mostrarPersonas(xPersona[],int);
 void listaPersonas(xPersona[],int);
 void preguntas(xPersona[],int);
+int buscarLibre(xPersona[],int);
 
 int main()
 {
     char seguir='s';
     int opcion=0;
     int i;
+    int posicion;
     int flagLugar;
     int auxDNI;
     char respuesta;
@@ -43,8 +45,15 @@ int main()
         switch(opcion)
         {
         case 1:
-
-            preguntas(personas,A);
+            posicion = buscarLibre(personas,A);
+            if(posicion!=-1)
+            {
+                preguntas(personas,A);
+            }
+            else
+            {
+                printf("No hay espacio disponible!");
+            }
             break;
         case 2:
             flagLugar=0;
@@ -155,16 +164,29 @@ void preguntas (xPersona preguntas[],int tam)
             printf("ingrese el DNI de la persona:");
             scanf("%d", &preguntas[i].DNI);
             preguntas[i].flagEstado=1;
+            mostrarPersonas()
 
             flagLugar=1;
             break;
 
         }
-
-        if(flagLugar==0&&tam>i)
+    }
+}
+int buscarLibre(xPersona espacio[],int tam)
+{
+    int lugar = -1;
+    int i;
+    for(i=0; i<tam; i++)
+    {
+        if(espacio[i].flagEstado==0)
         {
-            printf("no puede ingrasar mas personas, no hay mas lugar.\n");
+            lugar = i;
+            break;
         }
     }
+
+
+
+    return lugar;
 }
 
