@@ -19,6 +19,8 @@ void listaPersonas(xPersona[],int);
 void preguntas(xPersona[],int);
 int buscarEspacio(xPersona[],int);
 void graficar (xPersona[],int);
+void graficoBarras(xPersona[],int);
+void eliminarPersona(xPersona[],int);
 
 int main()
 {
@@ -62,35 +64,7 @@ int main()
             }
             break;
         case 2:
-            flagLugar=0;
-            printf("ingresa el numero de documento de la persona que desea eliminar:");
-            scanf("%d", &auxDNI);
-
-            for(i=0; i<A; i++)
-            {
-                if(personas[i].flagEstado==1&&auxDNI==personas[i].DNI)
-                {
-                    mostrarPersona(personas[i]);
-                    printf("esta seguro que quiere eliminar a esta persona?\n");
-                    respuesta=getche();
-
-                    if(respuesta=='s')
-                    {
-                        personas[i].flagEstado=0;
-                    }
-                    else
-                    {
-                        printf("la eliminacion se a cancelado.\n");
-                    }
-                    flagLugar=1;
-
-                    break;
-                }
-            }
-            if(flagLugar==0)
-            {
-                printf("esa persona no a sido registrada previamente o ya fue eliminada\n.");
-            }
+            eliminarPersona(personas,A);
             break;
         case 3:
             listaPersonas(personas,A);
@@ -99,7 +73,6 @@ int main()
             break;
         case 4:
             graficar(personas,A);
-
             break;
         case 5:
             seguir = 'n';
@@ -171,6 +144,12 @@ void preguntas (xPersona preguntas[],int tam)
             scanf("%d", &preguntas[i].edad);
             printf("ingrese el DNI de la persona:");
             scanf("%d", &preguntas[i].DNI);
+            while(preguntas[i].DNI>99999999||preguntas[i].DNI<10000000)
+            {
+                printf("ingrese un numero de DNI valido:");
+                scanf("%d", &preguntas[i].DNI);
+
+            }
             preguntas[i].flagEstado=1;
             mostrarPersona(preguntas[i]);
 
@@ -179,6 +158,43 @@ void preguntas (xPersona preguntas[],int tam)
 
         }
     }
+}
+void eliminarPersona(xPersona personas[],int tam)
+{
+    int i;
+    int flagLugar;
+    int auxDNI;
+    char respuesta;
+
+            flagLugar=0;
+            printf("ingresa el numero de documento de la persona que desea eliminar:");
+            scanf("%d", &auxDNI);
+
+            for(i=0; i<tam; i++)
+            {
+                if(personas[i].flagEstado==1&&auxDNI==personas[i].DNI)
+                {
+                    mostrarPersona(personas[i]);
+                    printf("esta seguro que quiere eliminar a esta persona?\n");
+                    respuesta=getche();
+
+                    if(respuesta=='s')
+                    {
+                        personas[i].flagEstado=0;
+                    }
+                    else
+                    {
+                        printf("la eliminacion se a cancelado.\n");
+                    }
+                    flagLugar=1;
+
+                    break;
+                }
+            }
+            if(flagLugar==0)
+            {
+                printf("esa persona no a sido registrada previamente o ya fue eliminada\n.");
+            }
 }
 int buscarEspacio(xPersona espacio[],int tam)
 {
@@ -199,29 +215,154 @@ int buscarEspacio(xPersona espacio[],int tam)
 }
 void graficar (xPersona personas[],int tam)
 {
+    int contMenor18=0;
+    int contEntre19y35=0;
+    int contMayor35=0;
     int i;
-       for(i=0;i<tam;i++);
-            {
-                if(personas[i].edad<18)
-                {
-                    printf("|  %d   |  *  |  *  |",personas[i].edad);
-                }
+    int maximo;
+    int flag;
 
+    for(i=0;i<tam;i++)
+    {
+        flag=0;
+        while(flag!=1)
+        {
+            if(personas[i].edad<=18)
+            {
+                contMenor18++;
+                flag=1;
+            }
+            else
+            {
+                if(personas[i].edad>35)
+                {
+                    contMayor35++;
+                    flag=1;
+
+                }
                 else
                 {
-                    if(personas[i].edad>35)
+                    contEntre19y35++;
+                    flag=1;
+
+                }
+            }
+        }
+    }
+    if(contMenor18>contMayor35&&contMenor18>contEntre19y35)
+    {
+        maximo=contMenor18;
+    }
+    else
+    {
+        if(contMayor35>contMenor18&&contMayor35>contEntre19y35)
+        {
+            maximo=contMayor35;
+        }
+        else
+        {
+            maximo=contEntre19y35;
+        }
+    }
+    for(i=maximo;i>0;i--)
+    {
+        if(i<= contMenor18)
+        {
+            printf("    *");
+        }
+        if(i<= contEntre19y35)
+        {
+            flag=1;
+            printf("\t  *");
+        }
+        if(i<= contMayor35)
+        {
+            if(flag==1)
+            {
+                printf("\t *");
+            }
+            else
+            {
+                printf("\t|\t *");
+            }
+        }
+        printf("\n");
+    }
+    printf("  |<18\t19-35\t>35|");
+}
+
+void graficoBarras(xPersona lista[],int cantidad)
+{
+    int hasta18=0,de19a35=0,mayor35=0,mayor,i,flag;
+
+                    for(i=0;i<cantidad;i++)
+                {
+                    while(lista[i].edad != -1)
                     {
-                        printf("|  *  |  *  |  %d   |",personas[i].edad);
+                            if(lista[i].edad <= 18)
+                        {
+                            hasta18++;
+                            break;
+                        }
+                        else
+                        {
+                            if(lista[i].edad > 35)
+                            {
+                                mayor35++;
+                                break;
+                            }
+                            else
+                            {
+                                de19a35++;
+                                break;
+                            }
+                        }
+
+                     }
+                }
+
+
+                if(hasta18 >= de19a35 && hasta18 >= mayor35)
+                {
+                    mayor = hasta18;
+                }
+                else
+                {
+                    if(de19a35 >= hasta18 && de19a35 >= mayor35)
+                    {
+                        mayor = de19a35;
                     }
                     else
                     {
-                        printf("|  *  |  %d   |  *  |",personas[i].edad);
+                        mayor = mayor35;
                     }
                 }
+
+                for(i=mayor; i>0; i--){
+
+                if(i<= hasta18)
+                {
+                    printf("    *");
+                }
+                if(i<= de19a35)
+                {
+                    flag=1;
+                    printf("\t  *");
+                }
+                if(i<= mayor35)
+                {
+                    if(flag==1)
+                    {
+                        printf("\t *");
+                    }
+                    else
+                    {
+                        printf("\t\t *");
+                    }
+                }
+                printf("\n");
             }
-}
-void mostraEdad (xPersona personas,int tam)
-{
+
+                printf("\n  |<18\t19-35\t>35");
 
 }
-
