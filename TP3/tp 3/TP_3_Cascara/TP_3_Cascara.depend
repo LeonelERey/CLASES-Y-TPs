@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1476751666 source:g:\programacion c\trabajos practicos\tp_3_cascara\tp_3_cascara\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1476749686 g:\programacion c\trabajos practicos\tp_3_cascara\tp_3_cascara\funciones.h
+
+1476751658 source:g:\programacion c\trabajos practicos\tp_3_cascara\tp_3_cascara\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1477090686 source:d:\programacion c\trabajos practicos\tp_3_cascara\tp_3_cascara\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1477090026 d:\programacion c\trabajos practicos\tp_3_cascara\tp_3_cascara\funciones.h
+
+1477090686 source:d:\programacion c\trabajos practicos\tp_3_cascara\tp_3_cascara\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1477077004 source:c:\users\qoqo\desktop\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_3_cascara\tp_3_cascara\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1477077004 c:\users\qoqo\desktop\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_3_cascara\tp_3_cascara\funciones.h
+
+1477077004 source:c:\users\qoqo\desktop\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_3_cascara\tp_3_cascara\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1496364362 source:c:\users\joako\desktop\facultad\tp 3 k\tp_3_cascara\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1477077004 c:\users\joako\desktop\facultad\tp 3 k\tp_3_cascara\funciones.h
+
+1496361333 source:c:\users\joako\desktop\facultad\tp 3 k\tp_3_cascara\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
