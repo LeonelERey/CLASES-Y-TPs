@@ -4,6 +4,7 @@
 
 int main()
 {
+    system("color c");
     char seguir='s';
     int opcion=0;
     int num1;
