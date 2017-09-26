@@ -8,22 +8,25 @@ typedef struct
     int id;
     char nombre[30];
     char nacionalidad[30];
-}xInterprete;
+} xInterprete;
 typedef struct
 {
     int idCancion;
     char titulo[30];
     int idInterprete;
     char duracion[5];
-}xCancion;
+} xCancion;
 void inicializarInterprete (xInterprete[],int);
 void inicializarCancion (xCancion[],int);
 void mostrarCan(xCancion[],int);
 void mostarInter(xInterprete[],int);
 void mostrarCanInter(xCancion[],xInterprete[],int,int);
 void cancionesPorInterprete (xCancion[],xInterprete[],int,int);
+void tiempoCant(xCancion[],xInterprete[],char[],int,int);
+void artMasCant(xCancion[],xInterprete[],int,int);
 int main()
 {
+    char auxnombre[30];
     xInterprete listaInterprete[TAM];
     xCancion listaCancion[TC];
 
@@ -38,17 +41,22 @@ int main()
     system("pause");
     cancionesPorInterprete(listaCancion,listaInterprete,TC,TAM);
     system("pause");
+    printf("ingrese el nombre del artista:");
+    fflush(stdin);
+    gets(auxnombre);
+    tiempoCant(listaCancion,listaInterprete,auxnombre,TC,TAM);
+    artMasCant(listaCancion,listaInterprete,TC,TAM);
 
     return 0;
 }
 void inicializarInterprete (xInterprete interprete[],int tamInteg)
 {
     int i;
-    int id[]={1,2,3,4,5};
-    char nombre[][20]={"bruno mars","justin bieber","david visval","adel","el indio"};
-    char nacionalidad[][20]={"EEUU","EEUU","ESPAÑA","GB","ARGENTINA"};
+    int id[]= {1,2,3,4,5};
+    char nombre[][20]= {"bruno mars","justin bieber","david visval","adel","el indio"};
+    char nacionalidad[][20]= {"EEUU","EEUU","ESPAÑA","GB","ARGENTINA"};
 
-    for(i=0;i<tamInteg;i++)
+    for(i=0; i<tamInteg; i++)
     {
         interprete[i].id=id[i];
         strcpy(interprete[i].nombre,nombre[i]);
@@ -58,13 +66,13 @@ void inicializarInterprete (xInterprete interprete[],int tamInteg)
 }
 void inicializarCancion (xCancion cancion[],int tam)
 {
-    int idCancion[]={1010,1011,1012,1013,1014,1014,1015,1016,1017,1018,1019};
-    char titulo[][30]={"la mordidita","la bicicleta","chuncky","baby","cant feel","24k magic","vacaciones","dont wanna know","closer","duele el corazon"};
-    int idInterprete[]={1,2,3,4,5,2,5,3,4,1};
-    char duracion[][5]={"03:30","04:60","02:30","05:45","06:36","05:16","02:33","03:66","02:36","05:12"};
+    int idCancion[]= {1010,1011,1012,1013,1014,1014,1015,1016,1017,1018,1019};
+    char titulo[][30]= {"la mordidita","la bicicleta","chuncky","baby","cant feel","24k magic","vacaciones","dont wanna know","closer","duele el corazon"};
+    int idInterprete[]= {1,2,1,4,5,1,5,3,4,1};
+    char duracion[][5]= {"03:30","04:60","02:30","05:45","06:36","05:16","02:33","03:66","02:36","05:12"};
     int i;
 
-    for(i=0;i<tam;i++)
+    for(i=0; i<tam; i++)
     {
         cancion[i].idCancion=idCancion[i];
         strcpy(cancion[i].titulo,titulo[i]);
@@ -77,7 +85,7 @@ void mostarInter(xInterprete interprete[],int tamInteg)
 {
     int i;
 
-    for(i=0;i<tamInteg;i++)
+    for(i=0; i<tamInteg; i++)
     {
         printf("%d==%s==%s\n",interprete[i].id,interprete[i].nombre,interprete[i].nacionalidad);
     }
@@ -86,7 +94,7 @@ void mostarInter(xInterprete interprete[],int tamInteg)
 void mostrarCan(xCancion cancion[],int tam)
 {
     int i;
-    for(i=0;i<tam;i++)
+    for(i=0; i<tam; i++)
     {
         printf("%d==%s==%d==%.5s\n",cancion[i].idCancion,cancion[i].titulo,cancion[i].idInterprete,cancion[i].duracion);
     }
@@ -98,9 +106,9 @@ void mostrarCanInter(xCancion cancion[],xInterprete interprete[],int tam,int tam
     int j;
     xInterprete aux;
     printf("ID\t\tNOMBRE\t\t\t      INERPRETE\t     DURACION\n");
-    for(i=0;i<tam;i++)
+    for(i=0; i<tam; i++)
     {
-        for(j=0;j<tamInteg;j++)
+        for(j=0; j<tamInteg; j++)
         {
             if(cancion[i].idInterprete==interprete[j].id)
             {
@@ -116,11 +124,11 @@ void cancionesPorInterprete (xCancion cancion[],xInterprete interprete[],int tam
 {
     int i;
     int j;
-    for(i=0;i<tamInteg;i++)
+    for(i=0; i<tamInteg; i++)
     {
-        printf("==================\n");
+        printf("===============================================\n");
         printf("%s:\n",interprete[i].nombre);
-        for(j=0;j<tam;j++)
+        for(j=0; j<tam; j++)
 
         {
             if(cancion[j].idInterprete==interprete[i].id)
@@ -130,4 +138,62 @@ void cancionesPorInterprete (xCancion cancion[],xInterprete interprete[],int tam
         }
 
     }
+}
+void tiempoCant(xCancion cancion[],xInterprete interprete[],char aux[],int tam,int tamInteg)
+{
+    int i;
+    int j;
+    printf("===============================================\n");
+    for(i=0; i<tamInteg; i++)
+    {
+        if(strcmp(aux,interprete[i].nombre)==0)
+        {
+            printf("%s:\n",interprete[i].nombre);
+            for(j=0; j<tam; j++)
+            {
+                if(interprete[i].id==cancion[j].idInterprete)
+                {
+                    printf("%.5s\n", cancion[j].duracion);
+                }
+
+            }
+        }
+
+    }
+}
+void artMasCant(xCancion cancion[],xInterprete interprete[],int tam,int tamInteg)
+{
+    int i;
+    int j;
+    int cont1=0;
+    int cont2=0;
+    int aux;
+    xInterprete aux2;
+
+    for(i=0; i<tamInteg; i++)
+    {
+        for(j=0; j<tam; j++)
+        {
+            if(cancion[j].idInterprete==interprete[i].id)
+            {
+                cont2++;
+            }
+        }
+        if(cont2>cont1)
+        {
+            cont1=cont2;
+            cont2=0;
+            aux=i;
+
+        }
+    }
+    for(i=0;i<tam;i++)
+    {
+
+        if(cancion[i].idInterprete==interprete[aux].id)
+        {
+            printf("%d==%s==%d ==%.5s\n",cancion[aux].idCancion,cancion[aux].titulo,cancion[aux].idInterprete,cancion[aux].duracion);
+        }
+    }
+
 }
