@@ -91,13 +91,13 @@ int al_add(ArrayList* this, void* pElement)
             }
         }
         if(bandera==0)
-    {
+        {
 
-        tam=this->size;
-        *(this->pElements+tam)=pElement;
-        this->size=this->size+1;
-        returnAux=0;
-    }
+            tam=this->size;
+            *(this->pElements+tam)=pElement;
+            this->size=this->size+1;
+            returnAux=0;
+        }
     }
 
 
@@ -151,7 +151,7 @@ void* al_get(ArrayList* this, int index)
     {
         if(index>-1&&index<=this->size)
         {
-                returnAux= *(this->pElements+index);
+            returnAux= *(this->pElements+index);
         }
     }
 
@@ -173,7 +173,7 @@ int al_contains(ArrayList* this, void* pElement)
     int i;
     if(this!=NULL&&pElement!=NULL)
     {
-        for(i=0;i<this->size;i++)
+        for(i=0; i<this->size; i++)
         {
             if(*(this->pElements+i)==pElement)
             {
@@ -224,18 +224,22 @@ int al_set(ArrayList* this, int index,void* pElement)
 int al_remove(ArrayList* this,int index)
 {
     int returnAux = -1;
-    int i;
+    int flag;
     if(this!=NULL)
     {
         if(index>-1&&index<=this->size)
         {
-            for(i=index;i<this->size;i++)
+            /*for(i=index; i<this->size; i++)
             {
                 *(this->pElements+index)=*(this->pElements+(index+1));
             }
             free(*(this->pElements+i));
-            this->size--;
-            returnAux=0;
+            this->size--;*/
+            flag=contract(this,index);
+            if(flag==0)
+            {
+                returnAux=0;
+            }
         }
     }
 
@@ -305,11 +309,31 @@ ArrayList* al_clone(ArrayList* this)
 int al_push(ArrayList* this, int index, void* pElement)
 {
     int returnAux = -1;
+    int i;
+    void* aux;
+
     if(this!=NULL&&pElement!=NULL)
     {
         if(index>-1&&index<=this->size)
         {
-            returnAux=0;
+            if(index == this->size)
+            {
+                al_add(this, pElement);
+                returnAux = 0;
+            }
+            else
+            {
+                al_add(this,pElement);
+                for(i=(this->size-1); i>index; i--)
+                {
+                    aux = al_get(this,i);
+                    al_set(this,i,al_get(this,(i-1)));
+                    al_set(this,(i-1),aux);
+                }
+                returnAux = 0;
+
+
+            }
         }
     }
 
@@ -326,6 +350,17 @@ int al_push(ArrayList* this, int index, void* pElement)
 int al_indexOf(ArrayList* this, void* pElement)
 {
     int returnAux = -1;
+    int i;
+    if(this!=NULL&&pElement!=NULL)
+    {
+        for(i=0;i<this->size;i++)
+        {
+            if(*(this->pElements+i)==pElement)
+            {
+                returnAux=i;
+            }
+        }
+    }
 
     return returnAux;
 }
@@ -339,6 +374,17 @@ int al_indexOf(ArrayList* this, void* pElement)
 int al_isEmpty(ArrayList* this)
 {
     int returnAux = -1;
+    if(this!=NULL)
+    {
+        if(this->size==0)
+        {
+            returnAux=1;
+        }
+        else
+        {
+            returnAux=0;
+        }
+    }
 
     return returnAux;
 }
@@ -355,6 +401,20 @@ int al_isEmpty(ArrayList* this)
 void* al_pop(ArrayList* this,int index)
 {
     void* returnAux = NULL;
+    int i;
+    if(this!=NULL)
+    {
+        if(index>-1&&index<=this->size)
+        {
+            returnAux=*(this->pElements+index);
+            free(this->pElements+index);
+            for(i=index; i<this->size; i++)
+            {
+                *(this->pElements+index)=*(this->pElements+(index+1));
+            }
+            this->size--;
+        }
+    }
 
     return returnAux;
 }
@@ -371,6 +431,21 @@ void* al_pop(ArrayList* this,int index)
 ArrayList* al_subList(ArrayList* this,int from,int to)
 {
     void* returnAux = NULL;
+    int i;
+    if(this!=NULL&&from<=to)
+    {
+        if(from<=this->size&&from>-1)
+        {
+            returnAux=al_newArrayList();
+            if(returnAux!=NULL)
+            {
+                for(i=from;i<to;i++)
+                {
+                    al_add(returnAux,al_get(this,i));
+                }
+            }
+        }
+    }
 
     return returnAux ;
 }
@@ -388,6 +463,21 @@ ArrayList* al_subList(ArrayList* this,int from,int to)
 int al_containsAll(ArrayList* this,ArrayList* this2)
 {
     int returnAux = -1;
+    int i;
+    int aux;
+    if(this!=NULL&&this2!=NULL)
+    {
+        returnAux=1;
+        for(i=0;i<this->size;i++)
+        {
+            aux=al_contains(this, al_get(this2, i));
+            if(aux==0)
+            {
+                returnAux=0;
+                break;
+            }
+        }
+    }
 
     return returnAux;
 }
@@ -442,6 +532,17 @@ int expand(ArrayList* this,int index)
 int contract(ArrayList* this,int index)
 {
     int returnAux = -1;
+    int i;
+    if(this!=NULL&&(index >= 0 && index <  this->size))
+    {
+        for(i=index; i<this->size; i++)
+        {
+            *(this->pElements)=*(this->pElements+i);
+
+        }
+        this->size--;
+        returnAux=0;
+    }
 
     return returnAux;
 }
