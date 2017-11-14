@@ -491,10 +491,56 @@ int al_containsAll(ArrayList* this,ArrayList* this2)
  */
 int al_sort(ArrayList* this, int (*pFunc)(void*,void*), int order)
 {
-    int returnAux = -1;
+   int returnAux = -1;
+    int i, j, aux;
+
+    void* AuxpList;
+    if(this != NULL && pFunc != NULL && order > -1 && order < 2)
+    {
+        for(i=0; i<al_len(this)-1; i++)
+        {
+            for(j=i+1; j<al_len(this); j++)
+            {
+                aux = pFunc(this->pElements[i],this->pElements[j]);
+                switch(aux)
+                {
+                case -1:
+                    if(order == 0)
+                    {
+                        AuxpList = this->pElements[j];
+                        this->pElements[j] = this->pElements[i];
+                        this->pElements[i] = AuxpList;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    break;
+                case 0:
+                    continue;
+                    break;
+                case 1:
+                    if(order == 0)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        AuxpList = this->pElements[j];
+                        this->pElements[j] = this->pElements[i];
+                        this->pElements[i] = AuxpList;
+                    }
+                    break;
+                }
+            }
+        }
+        returnAux = 0;
+    }
 
     return returnAux;
 }
+
+
 
 
 /** \brief Increment the number of elements in pList in AL_INCREMENT elements.
@@ -505,6 +551,32 @@ int al_sort(ArrayList* this, int (*pFunc)(void*,void*), int order)
 int resizeUp(ArrayList* this)
 {
     int returnAux = -1;
+    void* aux;
+    int flag = 0;
+    if(this != NULL)
+    {
+        if(this->size == this->reservedSize)
+        {
+            aux = realloc(this->pElements, sizeof(void*) * (this->reservedSize + AL_INCREMENT));
+            if(aux!=NULL)
+            {
+                this->pElements = aux;
+                this->reservedSize+=AL_INCREMENT;
+                flag = 1;
+            }
+        }
+        else
+        {
+            flag=1;
+        }
+        if(flag!=0)
+        {
+            returnAux = 0;
+        }
+
+
+    }
+
 
     return returnAux;
 
