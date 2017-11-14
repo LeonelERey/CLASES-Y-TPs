@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1510662995 source:c:\users\alumno\desktop\implementacionarraylist\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"personas.h"
+
+1510660958 c:\users\alumno\desktop\implementacionarraylist\arraylist.h
+
+1510669852 c:\users\alumno\desktop\implementacionarraylist\personas.h
+
+1510669712 source:c:\users\alumno\desktop\implementacionarraylist\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
