@@ -15,3 +15,28 @@
 	<string.h>
 	"ArrayList.h"
 
+1511129611 source:c:\users\leeoe\desktop\implementacionarraylist\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"ArrayList.h"
+	"personas.h"
+
+1510652124 c:\users\leeoe\desktop\implementacionarraylist\arraylist.h
+
+1511113484 c:\users\leeoe\desktop\implementacionarraylist\personas.h
+
+1511129121 source:c:\users\leeoe\desktop\implementacionarraylist\personas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"ArrayList.h"
+	"personas.h"
+
+1511129121 source:c:\users\leeoe\desktop\implementacionarraylist\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
