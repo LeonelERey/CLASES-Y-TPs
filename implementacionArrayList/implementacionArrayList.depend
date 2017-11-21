@@ -15,7 +15,7 @@
 	<string.h>
 	"ArrayList.h"
 
-1511129611 source:c:\users\leeoe\desktop\implementacionarraylist\main.c
+1511221023 source:c:\users\leeoe\desktop\implementacionarraylist\main.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -34,7 +34,7 @@
 	"ArrayList.h"
 	"personas.h"
 
-1511129121 source:c:\users\leeoe\desktop\implementacionarraylist\arraylist.c
+1511129732 source:c:\users\leeoe\desktop\implementacionarraylist\arraylist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
