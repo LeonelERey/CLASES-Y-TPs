@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1511265002 source:d:\gonzalez.elias\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1511265002 d:\gonzalez.elias\arraylist.h
+
+1511273490 source:d:\gonzalez.elias\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"tareas.h"
+
+1511273010 d:\gonzalez.elias\tareas.h
+
+1511273490 source:d:\gonzalez.elias\tareas.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"tareas.h"
+
